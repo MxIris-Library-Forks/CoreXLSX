@@ -16,13 +16,13 @@
 //
 
 public struct Path {
-  public let value: String
-  public let isRoot: Bool
-  public let components: [Substring]
+    public let value: String
+    public let isRoot: Bool
+    public let components: [Substring]
 
-  public init(_ value: String) {
-    self.value = value
-    isRoot = value.first == "/"
-    components = value.split(separator: "/")
-  }
+    public init(_ value: String) {
+        self.value = value
+        self.isRoot = value.first == "/"
+        self.components = value.split(separator: "/")
+    }
 }

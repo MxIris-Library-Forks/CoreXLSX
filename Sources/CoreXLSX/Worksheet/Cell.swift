@@ -15,54 +15,50 @@
 //  Created by Max Desiatov on 24/11/2018.
 //
 
-/** The type of the value stored in a spreadsheet cell. The specification for the internals is
- available at [datypic.com](http://www.datypic.com/sc/ooxml/t-ssml_ST_CellType.html).
- */
+/// The type of the value stored in a spreadsheet cell. The specification for the internals is
+/// available at [datypic.com](http://www.datypic.com/sc/ooxml/t-ssml_ST_CellType.html).
 public enum CellType: String, Codable {
-  case bool = "b"
-  case date = "d"
-  case number = "n"
-  case error = "e"
-  case sharedString = "s"
-  case string = "str"
-  case inlineStr
+    case bool = "b"
+    case date = "d"
+    case number = "n"
+    case error = "e"
+    case sharedString = "s"
+    case string = "str"
+    case inlineStr
 }
 
-/**
- The representation of a spreadsheet cell.
- More details of how cells are encoded in `.xlsx` internals are available at
- [wiki.ucl.ac.uk](https://wiki.ucl.ac.uk/display/~ucftpw2/2013/10/22/Using+git+for+version+control+of+Excel+spreadsheets+-+part+2+of+3).
- */
+/// The representation of a spreadsheet cell.
+/// More details of how cells are encoded in `.xlsx` internals are available at
+/// [wiki.ucl.ac.uk](https://wiki.ucl.ac.uk/display/~ucftpw2/2013/10/22/Using+git+for+version+control+of+Excel+spreadsheets+-+part+2+of+3).
 public struct Cell: Codable, Equatable {
-  public let reference: CellReference
-  public let type: CellType?
-  public let styleIndex: Int?
+    public let reference: CellReference
+    public let type: CellType?
+    public let styleIndex: Int?
 
-  /** Not every string in a cell is an inline string. You should use `stringValue(_: SharedStrings)`
-   on the `Cell` type, supplying it the result of `parseSharedStrings()` called on your `XLSXFile`
-   instance first. If any of those calls return `nil`, you can then attempt to look for the value in
-   `inlineString` or `value` properties.
-   */
-  public let inlineString: InlineString?
-  public let formula: Formula?
-  public let value: String?
-
-  public struct Formula: Codable, Equatable {
-    public let calculationIndex: Int?
+    /// Not every string in a cell is an inline string. You should use `stringValue(_: SharedStrings)`
+    /// on the `Cell` type, supplying it the result of `parseSharedStrings()` called on your `XLSXFile`
+    /// instance first. If any of those calls return `nil`, you can then attempt to look for the value in
+    /// `inlineString` or `value` properties.
+    public let inlineString: InlineString?
+    public let formula: Formula?
     public let value: String?
 
-    enum CodingKeys: String, CodingKey {
-      case calculationIndex = "ca"
-      case value = ""
-    }
-  }
+    public struct Formula: Codable, Equatable {
+        public let calculationIndex: Int?
+        public let value: String?
 
-  enum CodingKeys: String, CodingKey {
-    case formula = "f"
-    case value = "v"
-    case inlineString = "is"
-    case reference = "r"
-    case type = "t"
-    case styleIndex = "s"
-  }
+        enum CodingKeys: String, CodingKey {
+            case calculationIndex = "ca"
+            case value = ""
+        }
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case formula = "f"
+        case value = "v"
+        case inlineString = "is"
+        case reference = "r"
+        case type = "t"
+        case styleIndex = "s"
+    }
 }

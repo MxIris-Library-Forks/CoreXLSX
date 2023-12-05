@@ -13,35 +13,35 @@
 // limitations under the License.
 
 public struct Comments: Codable, Equatable {
-  public let commentList: CommentList
+    public let commentList: CommentList
 }
 
 public struct CommentList: Codable, Equatable {
-  public let items: [Comment]
+    public let items: [Comment]
 
-  public var itemsByReference: [String: Comment] {
-    Dictionary(uniqueKeysWithValues: items.map { ($0.reference, $0) })
-  }
+    public var itemsByReference: [String: Comment] {
+        Dictionary(uniqueKeysWithValues: items.map { ($0.reference, $0) })
+    }
 
-  enum CodingKeys: String, CodingKey {
-    case items = "comment"
-  }
+    enum CodingKeys: String, CodingKey {
+        case items = "comment"
+    }
 }
 
 public struct Comment: Codable, Equatable {
-  public let reference: String
-  public let text: Text
+    public let reference: String
+    public let text: Text
 
-  enum CodingKeys: String, CodingKey {
-    case reference = "ref"
-    case text
-  }
+    enum CodingKeys: String, CodingKey {
+        case reference = "ref"
+        case text
+    }
 }
 
 public struct Text: Codable, Equatable {
-  public let plain: String?
+    public let plain: String?
 
-  enum CodingKeys: String, CodingKey {
-    case plain = "t"
-  }
+    enum CodingKeys: String, CodingKey {
+        case plain = "t"
+    }
 }
