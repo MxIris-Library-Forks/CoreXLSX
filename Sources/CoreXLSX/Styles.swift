@@ -360,9 +360,9 @@ public struct Colors: Codable, Equatable {
     }
   }
 
-  public let indexed: Indexed
+  public let indexed: Indexed?
 
   enum CodingKeys: String, CodingKey {
-    case indexed/* = "indexedColors" */
+    case indexed = "indexedColors"
   }
 }

@@ -105,7 +105,7 @@ final class StylesTests: XCTestCase {
     XCTAssertEqual(styles.cellStyles!.count, 1)
     XCTAssertEqual(styles.differentialFormats!.count, 0)
     XCTAssertEqual(styles.tableStyles!.count, 0)
-    XCTAssertEqual(styles.colors!.indexed.rgbColors.count, 14)
+    XCTAssertEqual(styles.colors!.indexed?.rgbColors.count, 14)
 
     let ws = try file.parseWorksheet(at: file.parseWorksheetPaths()[0])
     guard let sd = ws.data else {
