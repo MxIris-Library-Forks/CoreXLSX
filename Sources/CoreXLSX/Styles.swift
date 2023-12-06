@@ -180,7 +180,7 @@ public struct Fill: Codable, Equatable {
 }
 
 public struct PatternFill: Codable, Equatable {
-    public let patternType: String
+    public let patternType: String?
     public let foregroundColor: Color?
     public let backgroundColor: Color?
 
@@ -361,8 +361,9 @@ public struct Colors: Codable, Equatable {
     }
 
     public let indexed: Indexed?
-
+    public let mrucolors: [Color]?
     enum CodingKeys: String, CodingKey {
         case indexed = "indexedColors"
+        case mrucolors = "mrucolors"
     }
 }
