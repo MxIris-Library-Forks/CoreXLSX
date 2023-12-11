@@ -107,13 +107,13 @@ public extension Cell {
     func format(in styles: Styles) -> Format? {
         guard let styleIndex = styleIndex else { return nil }
 
-        return styles.cellFormats?.items[styleIndex]
+        return styles.cellFormats?.items?[styleIndex]
     }
 
     /// Returns a `Font` value applied to this cell, if any.
     func font(in styles: Styles) -> Font? {
         guard let fontID = format(in: styles)?.fontId else { return nil }
 
-        return styles.fonts?.items[fontID]
+        return styles.fonts?.items?[fontID]
     }
 }

@@ -29,6 +29,6 @@ final class BorderTest: XCTestCase {
   func testSingleEmpty() throws {
     let result = try XMLDecoder().decode(Borders.self, from: xml)
     XCTAssertEqual(result.count, 1)
-    XCTAssertEqual(result.items[0], Border())
+    XCTAssertEqual(result.items?[0], Border())
   }
 }

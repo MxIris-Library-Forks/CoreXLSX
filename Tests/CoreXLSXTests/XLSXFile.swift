@@ -27,7 +27,7 @@ final class CoreXLSXTests: XCTestCase {
         let styles = try file.parseStyles()
 
         XCTAssertEqual(styles.borders?.count, 1)
-        XCTAssertEqual(styles.borders?.items.count, 1)
+        XCTAssertEqual(styles.borders?.items?.count, 1)
 
         let ws = try file.parseWorksheet(at: "xl/worksheets/sheet1.xml")
         XCTAssertEqual(ws.data?.rows.count, 0)
@@ -43,7 +43,7 @@ final class CoreXLSXTests: XCTestCase {
         let styles = try file.parseStyles()
 
         XCTAssertEqual(styles.borders?.count, 1)
-        XCTAssertEqual(styles.borders?.items.count, 1)
+        XCTAssertEqual(styles.borders?.items?.count, 1)
 
         let ws = try file.parseWorksheet(at: "xl/worksheets/sheet1.xml")
         XCTAssertEqual(ws.data?.rows.count, 1)

@@ -50,8 +50,8 @@ public struct Color: Codable, Equatable {
 }
 
 public struct NumberFormats: Codable, Equatable {
-    public let items: [NumberFormat]
-    public let count: Int
+    public let items: [NumberFormat]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "numFmt"
@@ -60,8 +60,8 @@ public struct NumberFormats: Codable, Equatable {
 }
 
 public struct NumberFormat: Codable, Equatable {
-    public let id: Int
-    public let formatCode: String
+    public let id: Int?
+    public let formatCode: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "numFmtId"
@@ -70,8 +70,8 @@ public struct NumberFormat: Codable, Equatable {
 }
 
 public struct Fonts: Codable, Equatable {
-    public let items: [Font]
-    public let count: Int
+    public let items: [Font]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "font"
@@ -93,7 +93,7 @@ public struct Fonts: Codable, Equatable {
 
 public struct Font: Codable, Equatable {
     public struct Size: Codable, Equatable {
-        public let value: Double
+        public let value: Double?
 
         enum CodingKeys: String, CodingKey {
             case value = "val"
@@ -101,7 +101,7 @@ public struct Font: Codable, Equatable {
     }
 
     public struct Name: Codable, Equatable {
-        public let value: String
+        public let value: String?
 
         enum CodingKeys: String, CodingKey {
             case value = "val"
@@ -166,8 +166,8 @@ public struct Font: Codable, Equatable {
 }
 
 public struct Fills: Codable, Equatable {
-    public let items: [Fill]
-    public let count: Int
+    public let items: [Fill]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "fill"
@@ -176,7 +176,7 @@ public struct Fills: Codable, Equatable {
 }
 
 public struct Fill: Codable, Equatable {
-    public let patternFill: PatternFill
+    public let patternFill: PatternFill?
 }
 
 public struct PatternFill: Codable, Equatable {
@@ -192,8 +192,8 @@ public struct PatternFill: Codable, Equatable {
 }
 
 public struct Borders: Codable, Equatable {
-    public let items: [Border]
-    public let count: Int
+    public let items: [Border]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "border"
@@ -234,8 +234,8 @@ public struct Border: Codable, Equatable {
 }
 
 public struct CellStyleFormats: Codable, Equatable {
-    public let items: [Format]
-    public let count: Int
+    public let items: [Format]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "xf"
@@ -244,8 +244,8 @@ public struct CellStyleFormats: Codable, Equatable {
 }
 
 public struct CellFormats: Codable, Equatable {
-    public let items: [Format]
-    public let count: Int
+    public let items: [Format]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "xf"
@@ -290,8 +290,8 @@ public struct Format: Codable, Equatable {
 }
 
 public struct CellStyles: Codable, Equatable {
-    public let items: [CellStyle]
-    public let count: Int
+    public let items: [CellStyle]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "cellStyle"
@@ -300,9 +300,9 @@ public struct CellStyles: Codable, Equatable {
 }
 
 public struct CellStyle: Codable, Equatable {
-    public let name: String
-    public let formatId: Int
-    public let builtinId: Int
+    public let name: String?
+    public let formatId: Int?
+    public let builtinId: Int?
 
     enum CodingKeys: String, CodingKey {
         case formatId = "xfId"
@@ -314,8 +314,8 @@ public struct CellStyle: Codable, Equatable {
 /// Specifies a subset of formatting instead of applying formatting globally.
 /// More details are available at [officeopenxml.com](http://officeopenxml.com/SSstyles.php).
 public struct DifferentialFormats: Codable, Equatable {
-    public let items: [Format]
-    public let count: Int
+    public let items: [Format]?
+    public let count: Int?
 
     enum CodingKeys: String, CodingKey {
         case items = "dxf"
@@ -324,8 +324,8 @@ public struct DifferentialFormats: Codable, Equatable {
 }
 
 public struct TableStyles: Codable, Equatable {
-    public let count: Int
-    public let items: [TableStyle]
+    public let count: Int?
+    public let items: [TableStyle]?
 
     enum CodingKeys: String, CodingKey {
         case count
@@ -341,7 +341,7 @@ public struct TableStyle: Codable, Equatable {
     public let pivot: Bool?
     public let name: String?
     public let count: Int?
-    public let elements: [Element]
+    public let elements: [Element]?
 
     enum CodingKeys: String, CodingKey {
         case pivot
@@ -353,7 +353,7 @@ public struct TableStyle: Codable, Equatable {
 
 public struct Colors: Codable, Equatable {
     public struct Indexed: Codable, Equatable {
-        public let rgbColors: [Color]
+        public let rgbColors: [Color]?
 
         enum CodingKeys: String, CodingKey {
             case rgbColors = "rgbColor"
