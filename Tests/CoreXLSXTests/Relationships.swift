@@ -62,30 +62,30 @@ Target="xl/workbook.xml"/>
 """.data(using: .utf8)!
 
 private let parsedFaultyWorksheet = [
-  CoreXLSX.Relationship(id: "rId3", type: CoreXLSX.Relationship.SchemaType.packageCoreProperties, target: "docProps/core.xml"),
-  CoreXLSX.Relationship(id: "rId2", type: CoreXLSX.Relationship.SchemaType.webExtensionTaskPanes, target: "xl/webextensions/taskpanes.xml"),
-  CoreXLSX.Relationship(id: "rId1", type: CoreXLSX.Relationship.SchemaType.officeDocument, target: "xl/workbook.xml"),
-  CoreXLSX.Relationship(id: "rId4", type: CoreXLSX.Relationship.SchemaType.extendedProperties, target: "docProps/app.xml"),
+    CoreXLSX.Relationship(id: "rId3", type: CoreXLSX.Relationship.SchemaType.packageCoreProperties.rawValue, target: "docProps/core.xml"),
+  CoreXLSX.Relationship(id: "rId2", type: CoreXLSX.Relationship.SchemaType.webExtensionTaskPanes.rawValue, target: "xl/webextensions/taskpanes.xml"),
+  CoreXLSX.Relationship(id: "rId1", type: CoreXLSX.Relationship.SchemaType.officeDocument.rawValue, target: "xl/workbook.xml"),
+  CoreXLSX.Relationship(id: "rId4", type: CoreXLSX.Relationship.SchemaType.extendedProperties.rawValue, target: "docProps/app.xml"),
 ]
 
 private let parsed = [
   Relationship(id: "rId1",
-               type: .packageCoreProperties,
+               type: CoreXLSX.Relationship.SchemaType.packageCoreProperties.rawValue,
                target: "docProps/core.xml"),
   Relationship(id: "rId2",
-               type: .extendedProperties,
+               type: CoreXLSX.Relationship.SchemaType.extendedProperties.rawValue,
                target: "docProps/app.xml"),
   Relationship(id: "rId3",
-               type: .officeDocument,
+               type: CoreXLSX.Relationship.SchemaType.officeDocument.rawValue,
                target: "xl/workbook.xml"),
   Relationship(id: "rId4",
-               type: .googleWorkbookMetadata,
+               type: CoreXLSX.Relationship.SchemaType.googleWorkbookMetadata.rawValue,
                target: "xl/metadata.xml"),
 ]
 
 private let person =
   Relationship(id: "rId4",
-               type: .person,
+               type: CoreXLSX.Relationship.SchemaType.person.rawValue,
                target: "xl/workbook.xml")
 
 final class RelationshipsTests: XCTestCase {
@@ -142,10 +142,10 @@ final class RelationshipsTests: XCTestCase {
     let relationshipsFromFile = try file.parseRelationships()
 
     let expected = Relationships(items: [
-      Relationship(id: "rId3", type: .extendedProperties, target: "docProps/app.xml"),
-      Relationship(id: "rId2", type: .packageCoreProperties, target: "docProps/core.xml"),
-      Relationship(id: "rId1", type: .officeDocument, target: "xl/workbook.xml"),
-      Relationship(id: "rId4", type: .customProperties, target: "docProps/custom.xml"),
+        Relationship(id: "rId3", type: CoreXLSX.Relationship.SchemaType.extendedProperties.rawValue, target: "docProps/app.xml"),
+        Relationship(id: "rId2", type: CoreXLSX.Relationship.SchemaType.packageCoreProperties.rawValue, target: "docProps/core.xml"),
+        Relationship(id: "rId1", type: CoreXLSX.Relationship.SchemaType.officeDocument.rawValue, target: "xl/workbook.xml"),
+        Relationship(id: "rId4", type: CoreXLSX.Relationship.SchemaType.customProperties.rawValue, target: "docProps/custom.xml"),
     ])
 
     XCTAssertEqual(relationshipsFromFile, expected)

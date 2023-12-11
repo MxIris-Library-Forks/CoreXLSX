@@ -20,100 +20,100 @@ import XCTest
 import XMLCoder
 
 private let numberFormats = NumberFormats(
-  items: [
-    NumberFormat(
-      id: 0,
-      formatCode: "General"
-    ),
-  ], count: 1
+    items: [
+        NumberFormat(
+            id: 0,
+            formatCode: "General"
+        ),
+    ], count: 1
 )
 
 private let fonts = Fonts(
-  items: [
-    Font(
-      size: Font.Size(value: 10),
-      color: Color(indexed: 8, auto: nil, rgb: nil),
-      name: Font.Name(value: "Helvetica Neue"),
-      bold: nil,
-      italic: nil,
-      strike: nil
-    ),
-    Font(
-      size: Font.Size(value: 12),
-      color: Color(indexed: 8, auto: nil, rgb: nil),
-      name: Font.Name(value: "Helvetica Neue"),
-      bold: nil,
-      italic: nil,
-      strike: nil
-    ),
-    Font(
-      size: Font.Size(value: 10),
-      color: Color(indexed: 8, auto: nil, rgb: nil),
-      name: Font.Name(value: "Helvetica Neue"),
-      bold: Font.Bold(value: true),
-      italic: nil,
-      strike: nil
-    ),
-  ], count: 3
+    items: [
+        Font(
+            size: Font.Size(value: 10),
+            color: Color(indexed: 8, auto: nil, rgb: nil, theme: nil, tint: nil),
+            name: Font.Name(value: "Helvetica Neue"),
+            bold: nil,
+            italic: nil,
+            strike: nil
+        ),
+        Font(
+            size: Font.Size(value: 12),
+            color: Color(indexed: 8, auto: nil, rgb: nil, theme: nil, tint: nil),
+            name: Font.Name(value: "Helvetica Neue"),
+            bold: nil,
+            italic: nil,
+            strike: nil
+        ),
+        Font(
+            size: Font.Size(value: 10),
+            color: Color(indexed: 8, auto: nil, rgb: nil, theme: nil, tint: nil),
+            name: Font.Name(value: "Helvetica Neue"),
+            bold: Font.Bold(value: true),
+            italic: nil,
+            strike: nil
+        ),
+    ], count: 3
 )
 
 private let fills = Fills(items: [
-  Fill(patternFill: PatternFill(
-    patternType: "none",
-    foregroundColor: nil,
-    backgroundColor: nil
-  )),
-  Fill(patternFill: PatternFill(
-    patternType: "gray125",
-    foregroundColor: nil,
-    backgroundColor: nil
-  )),
-  Fill(patternFill: PatternFill(
-    patternType: "solid",
-    foregroundColor: Color(indexed: 9, auto: nil, rgb: nil),
-    backgroundColor: Color(indexed: nil, auto: 1, rgb: nil)
-  )),
-  Fill(patternFill: PatternFill(
-    patternType: "solid",
-    foregroundColor: Color(indexed: 11, auto: nil, rgb: nil),
-    backgroundColor: Color(indexed: nil, auto: 1, rgb: nil)
-  )),
-  Fill(patternFill: PatternFill(
-    patternType: "solid",
-    foregroundColor: Color(indexed: 13, auto: nil, rgb: nil),
-    backgroundColor: Color(indexed: nil, auto: 1, rgb: nil)
-  )),
+    Fill(patternFill: PatternFill(
+        patternType: "none",
+        foregroundColor: nil,
+        backgroundColor: nil
+    )),
+    Fill(patternFill: PatternFill(
+        patternType: "gray125",
+        foregroundColor: nil,
+        backgroundColor: nil
+    )),
+    Fill(patternFill: PatternFill(
+        patternType: "solid",
+        foregroundColor: Color(indexed: 9, auto: nil, rgb: nil, theme: nil, tint: nil),
+        backgroundColor: Color(indexed: nil, auto: "true", rgb: nil, theme: nil, tint: nil)
+    )),
+    Fill(patternFill: PatternFill(
+        patternType: "solid",
+        foregroundColor: Color(indexed: 11, auto: nil, rgb: nil, theme: nil, tint: nil),
+        backgroundColor: Color(indexed: nil, auto: "true", rgb: nil, theme: nil, tint: nil)
+    )),
+    Fill(patternFill: PatternFill(
+        patternType: "solid",
+        foregroundColor: Color(indexed: 13, auto: nil, rgb: nil, theme: nil, tint: nil),
+        backgroundColor: Color(indexed: nil, auto: "true", rgb: nil, theme: nil, tint: nil)
+    )),
 ], count: 5)
 
 final class StylesTests: XCTestCase {
-  func testStyles() throws {
-    guard let file =
-      XLSXFile(filepath: "\(fixturesPath)/categories.xlsx")
-    else {
-      XCTFail("failed to open the file")
-      return
+    func testStyles() throws {
+        guard let file =
+            XLSXFile(filepath: "\(fixturesPath)/categories.xlsx")
+        else {
+            XCTFail("failed to open the file")
+            return
+        }
+
+        let styles = try file.parseStyles()
+
+        XCTAssertEqual(styles.numberFormats!, numberFormats)
+        XCTAssertEqual(styles.fills!, fills)
+        XCTAssertEqual(styles.fonts!, fonts)
+        XCTAssertEqual(styles.borders!.count, 13)
+        XCTAssertEqual(styles.cellStyleFormats!.count, 1)
+        XCTAssertEqual(styles.cellFormats!.count, 28)
+        XCTAssertEqual(styles.cellStyles!.count, 1)
+        XCTAssertEqual(styles.differentialFormats!.count, 0)
+        XCTAssertEqual(styles.tableStyles!.count, 0)
+        XCTAssertEqual(styles.colors!.indexed?.rgbColors.count, 14)
+
+        let ws = try file.parseWorksheet(at: file.parseWorksheetPaths()[0])
+        guard let sd = ws.data else {
+            XCTFail("no sheet data available")
+            return
+        }
+
+        XCTAssertEqual(sd.rows.first?.cells.first?.font(in: styles)?.size?.value, 12)
+        XCTAssertEqual(sd.rows.last?.cells.first?.font(in: styles)?.size?.value, 10)
     }
-
-    let styles = try file.parseStyles()
-
-    XCTAssertEqual(styles.numberFormats!, numberFormats)
-    XCTAssertEqual(styles.fills!, fills)
-    XCTAssertEqual(styles.fonts!, fonts)
-    XCTAssertEqual(styles.borders!.count, 13)
-    XCTAssertEqual(styles.cellStyleFormats!.count, 1)
-    XCTAssertEqual(styles.cellFormats!.count, 28)
-    XCTAssertEqual(styles.cellStyles!.count, 1)
-    XCTAssertEqual(styles.differentialFormats!.count, 0)
-    XCTAssertEqual(styles.tableStyles!.count, 0)
-    XCTAssertEqual(styles.colors!.indexed?.rgbColors.count, 14)
-
-    let ws = try file.parseWorksheet(at: file.parseWorksheetPaths()[0])
-    guard let sd = ws.data else {
-      XCTFail("no sheet data available")
-      return
-    }
-
-    XCTAssertEqual(sd.rows.first?.cells.first?.font(in: styles)?.size?.value, 12)
-    XCTAssertEqual(sd.rows.last?.cells.first?.font(in: styles)?.size?.value, 10)
-  }
 }

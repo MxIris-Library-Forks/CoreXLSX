@@ -43,7 +43,7 @@ public struct Styles: Codable, Equatable {
 
 public struct Color: Codable, Equatable {
     public let indexed: Int?
-    public let auto: Int?
+    public let auto: String?
     public let rgb: String?
     public let theme: Int?
     public let tint: Double?
