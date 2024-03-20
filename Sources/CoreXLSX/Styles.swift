@@ -132,13 +132,22 @@ public struct Font: Codable, Equatable {
         }
     }
 
+    public struct Underline: Codable, Equatable {
+        public let value: Bool?
+        
+        enum CodingKeys: String, CodingKey {
+            case value = "val"
+        }
+    }
+    
     public let size: Size?
     public let color: Color?
     public let name: Name?
     public let bold: Bold?
     public let italic: Italic?
     public let strike: Strike?
-
+    public let underline: Underline?
+    
     enum CodingKeys: String, CodingKey {
         case size = "sz"
         case color
@@ -146,6 +155,7 @@ public struct Font: Codable, Equatable {
         case bold = "b"
         case italic = "i"
         case strike
+        case underline = "u"
     }
 
     init(
@@ -154,7 +164,8 @@ public struct Font: Codable, Equatable {
         name: Name? = nil,
         bold: Bold? = nil,
         italic: Italic? = nil,
-        strike: Strike? = nil
+        strike: Strike? = nil,
+        underline: Underline? = nil
     ) {
         self.size = size
         self.color = color
@@ -162,6 +173,7 @@ public struct Font: Codable, Equatable {
         self.bold = bold
         self.italic = italic
         self.strike = strike
+        self.underline = underline
     }
 }
 
